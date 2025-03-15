@@ -1,0 +1,101 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "view": {"stroke": "transparent"},
+    "axis": {
+      "labelColor": "#848886",
+      "titleColor": "#888b89"
+    }
+  },
+  "data": {"name": "dataset"},
+  "spacing": 20,
+  "bounds": "flush",
+  "vconcat": [
+    {
+      "width": 250,
+      "height": 100,
+      "mark": {
+        "type": "bar",
+        "stroke": null,
+        "cornerRadiusEnd": 3,
+        "tooltip": true,
+        "color": "#03f44b"
+      },
+      "encoding": {
+        "x": {
+          "field": "Month",
+          "type": "ordinal",
+          "sort": [
+            "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+          ],
+          "axis": null
+        },
+        "y": {
+          "field": "_Track",
+          "aggregate": "sum",
+          "axis": null
+        }
+      }
+    },
+    {
+      "width": 250,
+      "height": 150,
+      "mark": {
+        "type": "rect",
+        "cornerRadius": 5,
+        "stroke": "#0A6D34",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "y": {
+          "field": "Day of Week",
+          "type": "ordinal",
+          "title": "",
+          "sort": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          "axis": {
+            "labelColor": "#ffffff",
+            "labelFontSize": 18
+          }
+        },
+        "x": {
+          "field": "Month",
+          "type": "ordinal",
+          "title": "Month",
+          "sort": [
+            "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+          ],
+          "axis": {
+            "labelColor": "#ffffff",
+            "labelFontSize": 18
+          }
+        },
+        "color": {
+          "aggregate": "sum",
+          "field": "_Track",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 5, 10],
+            "range": ["#1DB954", "#0A6D34", "#064F23"]
+          },
+          "legend": {
+            "padding":20,
+            "title": "Track Count",
+            "titleColor": "#ffffff",
+            "labelColor": "#ffffff",
+            "orient": "right",
+            "values": [0, 5, 10],
+            "labelExpr": "datum.value === 10 ? '>10' : datum.value"
+          }
+        },
+        "size": {"value": 1800},
+        "tooltip": [
+          {"field": "Month", "type": "ordinal"},
+          {"field": "Day of Week", "type": "ordinal"},
+          {"field": "_Track", "type": "quantitative"}
+        ]
+      }
+    }
+  ]
+}
